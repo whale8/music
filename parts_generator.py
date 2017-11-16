@@ -67,7 +67,7 @@ def put_rondo(Instrument, chord, start_time, duration, n):
                 Instrument.notes.append(note)
 
 
-def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages, melody=False):
+def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages):
     """
     Attribute
     outputpath: str, output file's path
@@ -97,20 +97,6 @@ def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages, me
 
         put_rondo(piano, chord, i*passage_time, passage_time, 3)
         chord_progression.append([pm.note_number_to_name(note) for note in chord])
-
-    # --------------------generating melody-----------------------
-    if melody:
-        time = 0
-        denominator = [1, 1, 3, 3, 3, 3, 6, 6, 6]
-        while time <= passage_time * n_passages:
-            duration = passage_time/(random.choice(denominator))
-            cur_state = get_next_state(melody_prob[cur_state])
-            note_num = chords[cur_state][0] + base_key  # return [48-71]
-
-            note = pm.Note(
-                velocity=60, pitch=note_num, start=time, end=time+duration)
-            piano.notes.append(note)
-            time += duration
 
     piano_chord.instruments.append(piano)
     piano_chord.write(outputpath)
@@ -145,4 +131,4 @@ def melody_generator(inputpath, base_key, tempo, measure, n_passages):
 
 
 if __name__ == '__main__':
-    accompaniment_generator('accompaniment.mid', 48, 110, 3, 24, melody=True)
+    accompaniment_generator('accompaniment.mid', 48, 110, 3, 24)

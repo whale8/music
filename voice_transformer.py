@@ -2,7 +2,7 @@ import librosa
 import numpy as np
 from math import log2
 # -----------my module------------
-from pitch_estimater import pitch_estimater
+from pitch_estimator import pitch_estimator
 
 
 # C4(261Hz, midi-number 60)の音声データ(np.ndarray)を作成
@@ -10,7 +10,7 @@ from pitch_estimater import pitch_estimater
 
 
 def C4_generater(filename):  # midi number 60
-    Pitch = pitch_estimater(filename)
+    Pitch = pitch_estimator(filename)
     semitone = 2**(1/12)
     C4 = 220.0 * semitone**3  # 220 is A3
     n_semitones = 12 * log2(C4 / Pitch)
@@ -65,7 +65,7 @@ def voice_transformer(C4, sr, pitch, duration):
 
 if __name__ == "__main__":
     C4, sr = C4_generater('ra.wav')
-    estimated_pitch = pitch_estimater('ra.wav')
+    estimated_pitch = pitch_estimator('ra.wav')
     trimed = my_trim(C4, 1.0, sr=sr)
     librosa.output.write_wav('trimed.wav', trimed, sr)
 
