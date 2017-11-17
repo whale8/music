@@ -1,7 +1,9 @@
 import librosa
 import numpy as np
 import subprocess
-from parts_generator import accompaniment_generator, melody_generator
+#from parts_generator import accompaniment_generator, melody_generator
+from melody_generator import melody_generator
+from accom_generator import accompaniment_generator
 
 
 if __name__ == '__main__':

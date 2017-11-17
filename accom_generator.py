@@ -1,5 +1,5 @@
 from patterns import Accompaniment as Ac
-from constants import STATE_PROB, chords, get_next_state
+from constants import STATE_PROB, chords, get_next_state, CHORDS
 
 
 def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages):
@@ -16,6 +16,7 @@ def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages):
     passage_time = measure/(tempo/60)    # passage time
 
     Inst = 'Orchestral Harp'
+    # Inst = 'Acoustic Grand Piano'
     Piano = Ac(Instrument=Inst, tempo=tempo)
 
     INIT_STATE = 0
@@ -24,8 +25,11 @@ def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages):
     for i in range(0, n_passages):
         cur_state = get_next_state(STATE_PROB[cur_state])
         chord = [note + base_key for note in chords[cur_state]]
+        #chord = [note + base_key for note in CHORDS[cur_state]]
 
-        Piano.putRondo(chord, i*passage_time, passage_time, 3)
+        Piano.putRondo(chord, i*passage_time, passage_time, measure)
+        # Piano.putChord(chord, i*passage_time, passage_time)
+        # Piano.putRondo(chord, i*passage_time, passage_time, 3)
         Piano.storeChordList(chord=chord)
 
     Piano.write(outputpath=outputpath)

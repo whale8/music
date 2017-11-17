@@ -1,5 +1,5 @@
 import numpy as np
-from random import random
+from numpy import random
 from voice_transformer import C4_generater, voice_transformer
 from constants import get_next_state, chords, melody_prob
 from utilities import my_progressbar
@@ -15,7 +15,11 @@ def melody_generator(inputpath, base_key, tempo, measure, n_passages):
     melody_list = []  # 最後に書き出す対象
     time = 0
     i = 0
-    denominator = [1, 1, 1, 3, 3, 3, 3, 3, 6, 6]
+
+    length = [1, 1, 1, 1, 1, 2, 2]
+    denominator = [1, 1, 1]
+    denominator.extend([measure*i for i in length])
+
     while time <= passage_time * n_passages:
         duration = passage_time/(random.choice(denominator))
         cur_state = get_next_state(melody_prob[cur_state])
@@ -30,3 +34,11 @@ def melody_generator(inputpath, base_key, tempo, measure, n_passages):
         my_progressbar(i % 4, '  generating melody')
     print('')
     return melody_list
+
+
+if __name__ == '__main__':
+    measure = 3
+    denominator = [1, 1, 1]
+    length = [1, 1, 1, 1, 1, 2, 2]
+    denominator.extend([measure*i for i in length])
+    print(denominator)
