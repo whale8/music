@@ -25,7 +25,7 @@ def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages):
     for i in range(0, n_passages):
         cur_state = get_next_state(STATE_PROB[cur_state])
         chord = [note + base_key for note in chords[cur_state]]
-        #chord = [note + base_key for note in CHORDS[cur_state]]
+        # chord = [note + base_key for note in CHORDS[cur_state]]
 
         Piano.putRondo(chord, i*passage_time, passage_time, measure)
         # Piano.putChord(chord, i*passage_time, passage_time)
@@ -37,5 +37,5 @@ def accompaniment_generator(outputpath, base_key, tempo, measure, n_passages):
 
 
 if __name__ == "__main__":
-    progression = accompaniment_generator('accompaniment.mid', 48, 110, 3, 24)
+    progression = accompaniment_generator('MIR/accom.mid', 48, 110, 3, 24)
     print(progression)

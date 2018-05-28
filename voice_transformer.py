@@ -25,7 +25,7 @@ def C4_generater(filename):  # midi number 60
 
 def my_trim(y, time, gain=1.0, sr=44100):
     duration = int(y.size*(time/librosa.core.get_duration(y, sr)))
-    trimed = y[0:duration:1]  # trimming between 0[s] to duration/sr[s]
+    trimed = y[0:duration:1]  # trimming between 0[s] to duration[s]
 
     ones = np.ones(duration - int(duration/10), dtype='float32')
     lines = np.linspace(1, 0, int(duration/10), dtype='float32')

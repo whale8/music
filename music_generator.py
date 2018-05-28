@@ -1,7 +1,7 @@
 import librosa
 import numpy as np
 import subprocess
-#from parts_generator import accompaniment_generator, melody_generator
+# from parts_generator import accompaniment_generator, melody_generator
 from melody_generator import melody_generator
 from accom_generator import accompaniment_generator
 
@@ -44,4 +44,4 @@ if __name__ == '__main__':
 
     music = np.vstack((melody, accompaniment))
     music = librosa.core.to_mono(music)
-    librosa.output.write_wav('music.wav', music, 44100)
+    librosa.output.write_wav('music.wav', music, 44100, norm=True)

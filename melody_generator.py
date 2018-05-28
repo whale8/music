@@ -16,7 +16,7 @@ def melody_generator(inputpath, base_key, tempo, measure, n_passages):
     time = 0
     i = 0
 
-    length = [1, 1, 1, 1, 1, 2, 2]
+    length = [1, 1, 1, 1, 1, 2, 2, 2, 1.5]
     denominator = [1, 1, 1]
     denominator.extend([measure*i for i in length])
 
